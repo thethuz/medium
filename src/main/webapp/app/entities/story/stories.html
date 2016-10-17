@@ -1,0 +1,74 @@
+<div>
+    <h2>Stories</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="story.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Story
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="content"><span>Content</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="authorID"><span>Author ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="authorName"><span>Author Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="timeCreated"><span>Time Created</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="placeCreated"><span>Place Created</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="timeToRead"><span>Time To Read</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numberOfLove"><span>Number Of Love</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numberOfComment"><span>Number Of Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="story in vm.stories track by story.id">
+                    <td><a ui-sref="story-detail({id:story.id})">{{story.id}}</a></td>
+                    <td>{{story.title}}</td>
+                    <td>{{story.content}}</td>
+                    <td>{{story.authorID}}</td>
+                    <td>{{story.authorName}}</td>
+                    <td>{{story.timeCreated | date:'medium'}}</td>
+                    <td>{{story.placeCreated}}</td>
+                    <td>{{story.timeToRead}}</td>
+                    <td>{{story.category}}</td>
+                    <td>{{story.numberOfLove}}</td>
+                    <td>{{story.numberOfComment}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="story-detail({id:story.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="story.edit({id:story.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="story.delete({id:story.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-xs hidden-sm"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

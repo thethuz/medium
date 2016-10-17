@@ -1,0 +1,59 @@
+
+<div>
+    <h2><span>Story</span> {{vm.story.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{vm.story.title}}</span>
+        </dd>
+        <dt><span>Content</span></dt>
+        <dd>
+            <span>{{vm.story.content}}</span>
+        </dd>
+        <dt><span>Author ID</span></dt>
+        <dd>
+            <span>{{vm.story.authorID}}</span>
+        </dd>
+        <dt><span>Author Name</span></dt>
+        <dd>
+            <span>{{vm.story.authorName}}</span>
+        </dd>
+        <dt><span>Time Created</span></dt>
+        <dd>
+            <span>{{vm.story.timeCreated | date:'medium'}}</span>
+        </dd>
+        <dt><span>Place Created</span></dt>
+        <dd>
+            <span>{{vm.story.placeCreated}}</span>
+        </dd>
+        <dt><span>Time To Read</span></dt>
+        <dd>
+            <span>{{vm.story.timeToRead}}</span>
+        </dd>
+        <dt><span>Category</span></dt>
+        <dd>
+            <span>{{vm.story.category}}</span>
+        </dd>
+        <dt><span>Number Of Love</span></dt>
+        <dd>
+            <span>{{vm.story.numberOfLove}}</span>
+        </dd>
+        <dt><span>Number Of Comment</span></dt>
+        <dd>
+            <span>{{vm.story.numberOfComment}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="story-detail.edit({id:vm.story.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>

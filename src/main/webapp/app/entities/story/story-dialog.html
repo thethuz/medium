@@ -1,0 +1,99 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myStoryLabel">Create or edit a Story</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.story.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.story.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.story.title"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_content">Content</label>
+                <textarea class="form-control" name="content" id="field_content"
+                    ng-model="vm.story.content"  ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_authorID">Author ID</label>
+            <input type="number" class="form-control" name="authorID" id="field_authorID"
+                    ng-model="vm.story.authorID"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_authorName">Author Name</label>
+            <input type="text" class="form-control" name="authorName" id="field_authorName"
+                    ng-model="vm.story.authorName"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_timeCreated">Time Created</label>
+                <div class="input-group">
+                    <input id="field_timeCreated" type="text" class="form-control" name="timeCreated" datetime-picker="{{dateformat}}" ng-model="vm.story.timeCreated" is-open="vm.datePickerOpenStatus.timeCreated"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('timeCreated')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_placeCreated">Place Created</label>
+            <input type="text" class="form-control" name="placeCreated" id="field_placeCreated"
+                    ng-model="vm.story.placeCreated"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_timeToRead">Time To Read</label>
+            <input type="number" class="form-control" name="timeToRead" id="field_timeToRead"
+                    ng-model="vm.story.timeToRead"
+                    max="3" />
+            <div ng-show="editForm.timeToRead.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.timeToRead.$error.max">
+                    This field cannot be more than 3.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.timeToRead.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_category">Category</label>
+            <input type="text" class="form-control" name="category" id="field_category"
+                    ng-model="vm.story.category"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_numberOfLove">Number Of Love</label>
+            <input type="number" class="form-control" name="numberOfLove" id="field_numberOfLove"
+                    ng-model="vm.story.numberOfLove"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_numberOfComment">Number Of Comment</label>
+            <input type="number" class="form-control" name="numberOfComment" id="field_numberOfComment"
+                    ng-model="vm.story.numberOfComment"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
