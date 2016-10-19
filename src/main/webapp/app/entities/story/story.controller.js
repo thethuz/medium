@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.stories = [];
+		vm.users=[];
         vm.loadPage = loadPage;
         vm.page = 0;
         vm.links = {

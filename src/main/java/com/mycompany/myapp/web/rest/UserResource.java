@@ -27,7 +27,7 @@ import java.net.URISyntaxException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.util.stream.Collectors;
-
+import com.mycompany.myapp.security.SecurityUtils;
 /**
  * REST controller for managing users.
  *
@@ -146,7 +146,7 @@ public class UserResource {
 
     /**
      * GET  /users : get all users.
-     * 
+     *
      * @param pageable the pagination information
      * @return the ResponseEntity with status 200 (OK) and with body all users
      * @throws URISyntaxException if the pagination headers couldn't be generated
@@ -163,6 +163,20 @@ public class UserResource {
             .collect(Collectors.toList());
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(managedUserVMs, headers, HttpStatus.OK);
+    }
+    /*GET /user/:id
+
+
+    */
+    @RequestMapping(value = "/users/current",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ManagedUserVM> getUserID(){
+      Optional<User> user=userRepository.findOneByLogin();
+      ManagedUserVM managedUserVM=
+      HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+      return new ResponseEntity<>(managedUserVM,headers,HttpStatus.OK);
     }
 
     /**
@@ -199,4 +213,11 @@ public class UserResource {
         userService.deleteUser(login);
         return ResponseEntity.ok().headers(HeaderUtil.createAlert( "A user is deleted with identifier " + login, login)).build();
     }
+    /**
+    *GET /user/:id
+    *
+    *
+    **/
+
+
 }

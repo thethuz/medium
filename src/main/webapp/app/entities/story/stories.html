@@ -35,6 +35,7 @@
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
                 <tr ng-repeat="story in vm.stories track by story.id"><!--Dòng này lý giải tại sao lại gọi đc story-->
                     <td><a ui-sref="story-detail({id:story.id})">{{story.id}}</a></td>
+			
                     <td>{{story.title}}</td>
                     <td>{{story.content}}</td>
                     <td>{{story.authorID}}</td>
@@ -67,6 +68,9 @@
                             </button>
                         </div>
                     </td>
+                </tr>
+                <tr ng-repeat="user in vm.users track by user.id"><!--Dòng này lý giải tại sao lại gọi đc story-->
+                    <td>{{user.id}}</td>
                 </tr>
             </tbody>
         </table>
