@@ -9,7 +9,7 @@
 
     function StoryController ($scope, $state, DataUtils, Story, ParseLinks, AlertService) {
         var vm = this;
-        
+
         vm.stories = [];
         vm.loadPage = loadPage;
         vm.page = 0;
@@ -35,15 +35,18 @@
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
+                console.log(vm.predicate);
+		console.log(result);
                 return result;
             }
-
+            //Function này lấy dữ liệu từ data và nạp vào story.
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 for (var i = 0; i < data.length; i++) {
                     vm.stories.push(data[i]);
                 }
+                console.log(vm.stories[0]);
             }
 
             function onError(error) {
@@ -61,5 +64,6 @@
             vm.page = page;
             loadAll();
         }
+	console.log("xxxx"+Story);
     }
 })();

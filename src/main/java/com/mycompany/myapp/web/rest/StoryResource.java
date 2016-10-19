@@ -30,7 +30,7 @@ import java.util.Optional;
 public class StoryResource {
 
     private final Logger log = LoggerFactory.getLogger(StoryResource.class);
-        
+
     @Inject
     private StoryService storyService;
 

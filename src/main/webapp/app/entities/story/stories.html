@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="story in vm.stories track by story.id">
+                <tr ng-repeat="story in vm.stories track by story.id"><!--Dòng này lý giải tại sao lại gọi đc story-->
                     <td><a ui-sref="story-detail({id:story.id})">{{story.id}}</a></td>
                     <td>{{story.title}}</td>
                     <td>{{story.content}}</td>
