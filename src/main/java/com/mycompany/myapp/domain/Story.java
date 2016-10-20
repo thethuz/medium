@@ -6,14 +6,23 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-
+//import com.mycompany.myapp.domain.User;
+//import java.util.Optional;
 /**
  * A Story.
  */
 @Entity
 @Table(name = "story")
 public class Story implements Serializable {
-
+    // private String name;
+    // private Optional<User> owner;
+    // public void setOwner(Optional<User> owner){
+    //   this.owner=owner;
+    //   System.out.println("*\n"+owner);
+    // }
+    // public Optional<User> getOwner(){
+    //   return this.owner;
+    // }
     private static final long serialVersionUID = 1L;
 
     @Id

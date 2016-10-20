@@ -158,9 +158,16 @@ public class UserResource {
     public ResponseEntity<List<ManagedUserVM>> getAllUsers(Pageable pageable)
         throws URISyntaxException {
         Page<User> page = userRepository.findAllWithAuthorities(pageable);
+
         List<ManagedUserVM> managedUserVMs = page.getContent().stream()
             .map(ManagedUserVM::new)
             .collect(Collectors.toList());
+	System.out.println("*");
+	for(int i = 0; i < managedUserVMs.size(); i++) {
+            System.out.println(managedUserVMs.get(i));
+        }
+	System.out.println("*");
+	System.out.println("*");
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(managedUserVMs, headers, HttpStatus.OK);
     }
@@ -172,10 +179,18 @@ public class UserResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<ManagedUserVM> getUserID(){
-      Optional<User> user=userRepository.findOneByLogin();
-      ManagedUserVM managedUserVM=
-      HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
+    public void doNothing(){
+      System.out.println("Hello World");
+    }
+    /*
+    @RequestMapping(value = "/users/current",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<ManagedUserVM> getCurrentUserID(){
+      Optional<User> user=userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
+      //ManagedUserVM managedUserVM=
+      //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
       return new ResponseEntity<>(managedUserVM,headers,HttpStatus.OK);
     }
 

@@ -21,7 +21,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
-
+// import com.mycompany.myapp.security.SecurityUtils;
+// import com.mycompany.myapp.repository.UserRepository;
+// import com.mycompany.myapp.repository.StoryRepository;
+// import com.mycompany.myapp.domain.Story;
+// import com.mycompany.myapp.domain.User;
+// import com.mycompany.myapp.service.StoryService;
 /**
  * REST controller for managing Story.
  */
@@ -33,7 +38,14 @@ public class StoryResource {
 
     @Inject
     private StoryService storyService;
-
+    //private UserRepository userRepository;
+    // public void create(Story story) {
+    //     Optional<User> owner = userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+    //
+    //     story.setOwner(owner);
+    //     //StoryService storyService;
+    //     storyService.save(story);
+    // }
     /**
      * POST  /stories : Create a new story.
      *
