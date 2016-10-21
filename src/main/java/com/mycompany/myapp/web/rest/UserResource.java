@@ -174,24 +174,27 @@ public class UserResource {
     /*GET /user/:id
 
 
-    */
+    *//*
     @RequestMapping(value = "/users/current",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public void doNothing(){
       System.out.println("Hello World");
-    }
-    /*
+    }*/
+
     @RequestMapping(value = "/users/current",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<ManagedUserVM> getCurrentUserID(){
-      Optional<User> user=userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
-      //ManagedUserVM managedUserVM=
+      //Optional<User> user=userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin());
+      ManagedUserVM managedUserVM=new ManagedUserVM(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get());
+
+      //ManagedUserVM managedUserVM=newManagedUserVM managedUserVM=
       //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-      return new ResponseEntity<>(managedUserVM,headers,HttpStatus.OK);
+      //return ResponseEntity.created("location").header("MyResponseHeader", "MyValue").body("Hello World");
+      return new ResponseEntity<ManagedUserVM>(managedUserVM,HttpStatus.OK);
     }
 
     /**

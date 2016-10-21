@@ -1,0 +1,56 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "authorID",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "authorName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeCreated",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "placeCreated",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeToRead",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "max"
+            ],
+            "fieldValidateRulesMax": "3"
+        },
+        {
+            "fieldName": "category",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "numberOfLove",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberOfComment",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20161017092230",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "story",
+    "pagination": "infinite-scroll"
+}

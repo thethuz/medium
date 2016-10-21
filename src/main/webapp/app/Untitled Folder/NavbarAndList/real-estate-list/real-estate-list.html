@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row m-t-md">
+        <div class="col-sm-7">
+            <div class="panel-success">
+                <br/>
+                <p> {{products.length}} dự án được tìm thấy</p>
+                <ul class="list-group alt">
+                    <li class="list-group-item" ng-repeat="product in products" style="margin-top:20px">
+                        <div class="media">
+                            <span class="pull-left thumb-xxl"><img src="{{product.image}}" alt="..." class="imageitem"></span>
+                            <div class="pull-right text-success m-t-sm">
+                                <i class="fa fa-circle"></i>
+                            </div>
+                            <div class="media-body">
+                                <div>
+                                    <a href class="font-bold" style="color: green">{{product.name}} </a>
+                                    <a href=""><img src="content/images/gpsmap.jpg" class="gpsimage"></a>
+                                </div>
+                                <small class="text-muted">{{product.address}}</small>
+                                <br/>
+                                <small class="text-muted">Diện tích: {{product.area}}</small>
+                                <br/>
+                                <small class="text-muted">Số phòng: {{product.room}}</small>
+                                <br/>
+                                <small class="text-muted">Chủ đầu tư: {{product.host}}</small>
+                                <br/>
+                                <small class="text-muted">Tiến độ: {{product.progress}}</small>
+                                <br/>
+                                <br/>
+                                <p class="font-bold">Giá: {{product.price}}</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <pagination total-items="totalItems" ng-model="currentPage" class="pagination" boundary-links="true" rotate="false"></pagination>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading font-bold">Biểu đồ giá</div>
+                <div class="panel-body">
+                    <div ui-jq="plot" ui-options="
+              [
+                { data: {{d}}, points: { show: true, radius: 6}, splines: { show: true, tension: 0.45, lineWidth: 5, fill: 0 } }
+              ], 
+              {
+                colors: ['#23b7e5'],
+                series: { shadowSize: 3 },
+                xaxis:{ 
+                  font: { color: '#ccc' },
+                  position: 'bottom',
+                  ticks: [
+                    [ 1, 'Jan' ], [ 2, 'Feb' ], [ 3, 'Mar' ], [ 4, 'Apr' ], [ 5, 'May' ], [ 6, 'Jun' ], [ 7, 'Jul' ], [ 8, 'Aug' ], [ 9, 'Sep' ], [ 10, 'Oct' ], [ 11, 'Nov' ], [ 12, 'Dec' ]
+                  ]
+                },
+                yaxis:{ font: { color: '#ccc' } },
+                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                tooltip: true,
+                tooltipOpts: { content: '%x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+              }
+            " style="height:240px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

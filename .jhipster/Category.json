@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "draft",
+            "otherEntityName": "draft",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "category"
+        },
+        {
+            "relationshipName": "story",
+            "otherEntityName": "story",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "category"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "categoryName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "categoryRelate",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161017093352",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "category",
+    "pagination": "infinite-scroll"
+}
