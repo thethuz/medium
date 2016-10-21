@@ -18,6 +18,7 @@
         vm.openFile = DataUtils.openFile;
         vm.save = save;
 
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -27,6 +28,8 @@
         }
 
         function save () {
+          console.log(vm.story);
+          console.log(entity);
             vm.isSaving = true;
             if (vm.story.id !== null) {
                 Story.update(vm.story, onSaveSuccess, onSaveError);

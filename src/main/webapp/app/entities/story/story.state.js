@@ -103,9 +103,9 @@
                                 placeCreated: null,
                                 timeToRead: null,
                                 category: null,
-                                numberOfLove: null,
-                                numberOfComment: null,
-                                id: null
+                                numberOfLove: 0,
+                                numberOfComment: 0,
+                                //id: null
                             };
                         }
                     }
