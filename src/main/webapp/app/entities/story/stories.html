@@ -1,5 +1,5 @@
 <div>
-    <h2>Stories</h2>
+    <!--<h2>Stories</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -13,39 +13,49 @@
             </div>
         </div>
     </div>
-    <br/>
+    <br/>-->
     <div class="table-responsive">
         <table class="jh-table table table-striped">
-            <thead>
+            <!--thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="title"><span>Title</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="content"><span>Content</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="authorID"><span>Author ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="authorName"><span>Author Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="timeCreated"><span>Time Created</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="placeCreated"><span>Place Created</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="timeToRead"><span>Time To Read</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="category"><span>Category</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="numberOfLove"><span>Number Of Love</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="numberOfComment"><span>Number Of Comment</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
-                <tr ng-repeat="story in vm.stories track by story.id"><!--Dòng này lý giải tại sao lại gọi đc story-->
-                    <td><a ui-sref="story-detail({id:story.id})">{{story.id}}</a></td>
-
-                    <td>{{story.title}}</td>
-                    <td>{{story.content}}</td>
-                    <td>{{story.authorID}}</td>
-                    <td>{{story.authorName}}</td>
-                    <td>{{story.timeCreated | date:'medium'}}</td>
-                    <td>{{story.placeCreated}}</td>
-                    <td>{{story.timeToRead}}</td>
-                    <td>{{story.category}}</td>
-                    <td>{{story.numberOfLove}}</td>
-                    <td>{{story.numberOfComment}}</td>
+					<th><span>Title</span></th>
+					<th><span>Content</span></th>
+					<th><span>Author ID</span></th>
+					<th><span>Author Name</span></th>
+		           	<th><span>Time Created</span></th>
+					<th><span>Place Created</span></th> 
+					<th><span>Time To Read</span></th> 
+					<th><span>Category</span></th> 
+					<th><span>Number Of Love</span></th>
+					<th><span>Number Of Comment</span></th> 
+				</tr>
+            </thead-->
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']" ng-repeat="story in vm.stories track by story.id">
+                
+					<!--Dòng này lý giải tại sao lại gọi đc story-->
+                    <td style="color:blue;"><a ui-sref="story-detail({id:story.id})">{{story.id}}</a></td>
+					<tr>
+                    	<td >{{story.title}}</td>
+						<td >{{story.timeCreated | date:'medium'}}</td>
+					</tr>
+				<tr>
+					<td >{{story.timeCreated | date:'medium'}}</td>
+					<td >{{story.placeCreated}}</td>
+					<td >{{story.timeToRead}}</td>
+				</tr>
+				<tr>
+					<td >{{story.authorID}}</td>
+                    <td >{{story.authorName}}</td>
+				</tr>
+				<tr>
+                    <td >{{story.content}}</td>
+				</tr>
+				<tr>
+					<td >{{story.numberOfLove}}<div style="color:red">&#9829; </div></td>
+					<td >{{story.numberOfComment}} <div style="color:green;">response</div></td>
+				</tr>
+                  <td >{{story.category}}</td>
+					
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -68,7 +78,7 @@
                             </button>
                         </div>
                     </td>
-                </tr>
+                
                 <!--tr ng-repeat="user in vm.storyOwner track by user.id"><!--Dòng này lý giải tại sao lại gọi đc story-->
                     <tr>
                 </tr>

@@ -14,6 +14,7 @@ Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
 /* ==========================================================================
 Developement Ribbon
 ========================================================================== */
+
 .ribbon {
     background-color: #a00;
     box-shadow: 0 0 10px #888;
@@ -29,11 +30,11 @@ Developement Ribbon
     webkit-box-shadow: 0 0 10px #888;
     webkit-transform: rotate(-45deg);
     white-space: nowrap;
-    width: 15em;
+    width: 0em;
     z-index: 9999;
     pointer-events: none;
 }
-
+/*
 .ribbon a {
     border: 1px solid #faa;
     color: #fff;
@@ -101,7 +102,7 @@ Main page styles
     display: inline-block;
     width: 347px;
     height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
+    background: url("../images/obama.jpg") no-repeat center top;
     background-size: contain;
 }
 
@@ -281,7 +282,10 @@ entity tables helpers
     /* Align text in td verifically (top aligned by Bootstrap) */
     vertical-align: middle;
 }
-
+.jh-table > tbody > tr > tr > td {
+    /* Align text in td verifically (top aligned by Bootstrap) */
+    vertical-align: middle;
+}
 .jh-table > thead > tr > th > .glyphicon-sort, .jh-table > thead > tr > th > .glyphicon-sort-by-attributes, .jh-table > thead > tr > th > .glyphicon-sort-by-attributes-alt {
     /* less visible sorting icons */
     opacity: 0.5;
