@@ -8,13 +8,14 @@
     //
     function Story ($resource, DateUtils) {
         var resourceUrl =  'api/stories/:id';
-		console.log("story.service da dc goi");
+		      console.log("story.service da dc goi");
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
                     if (data) {
+                      console.log(data);
                         data = angular.fromJson(data);
                         data.timeCreated = DateUtils.convertDateTimeFromServer(data.timeCreated);
                     }
@@ -55,6 +56,7 @@
     StoryOwner.$inject=['$resource','DateUtils'];
 
     function StoryOwner ($resource, DateUtils){
+	var retturn;
     var resourceUrl=	'api/account';
 	console.log("StoryOwne2");
     return $resource(resourceUrl, {}, {
@@ -63,9 +65,11 @@
         method		:'GET',
         transformResponse:function (data) {
           if (data) {
+			         retturn=data;
             data = angular.fromJson(data);
             data.timeCreated = DateUtils.convertDataTimeFromServer(data.timeCreates);
           }
+			console.log("this is data");
         return data;
         }
       },

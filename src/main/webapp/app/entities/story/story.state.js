@@ -97,7 +97,6 @@
                             return {
                                 title: null,
                                 content: null,
-                                authorID: null,
                                 authorName: null,
                                 timeCreated: null,
                                 placeCreated: null,
@@ -105,7 +104,8 @@
                                 category: null,
                                 numberOfLove: 0,
                                 numberOfComment: 0,
-                                //id: null
+                                author: null,
+                                id: null
                             };
                         }
                     }
@@ -166,5 +166,5 @@
             }]
         });
     }
-console.log("da dc goi=state");
+
 })();

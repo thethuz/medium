@@ -4,13 +4,13 @@
     angular
         .module('mediumApp')
         .controller('StoryController', StoryController);
-	console.log("goi StoryController.inject");
+	//////console.log("goi StoryController.inject");
     StoryController.$inject = ['$scope', '$state', 'DataUtils', 'Story', 'ParseLinks', 'AlertService','StoryOwner'];
-	console.log("goi StoryController");
-	console.log(StoryController);
+	////console.log("goi StoryController");
+	////console.log(StoryController);
     function StoryController ($scope, $state, DataUtils, Story, ParseLinks, AlertService, StoryOwner) {
         var vm = this;
-	console.log("story controller");
+	////console.log("story controller");
         vm.stories = [];
 	      vm.storyOwner=[];
         vm.loadPage = loadPage;
@@ -39,20 +39,20 @@
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
-                console.log(vm.predicate);
-				console.log(result);
+                ////console.log(vm.predicate);
+				////console.log(result);
                 return result;
             }
             //Function này lấy dữ liệu từ data và nạp vào story.
             function onSuccess(data, headers) {
-                console.log("xxx");
-                console.log(vm);
-                console.log("vmlinks before parse");
-                console.log(vm.links);
-                console.log(ParseLinks);
+                ////console.log("xxx");
+                ////console.log(vm);
+                ////console.log("vmlinks before parse");
+                ////console.log(vm.links);
+                ////console.log(ParseLinks);
                 vm.links = ParseLinks.parse(headers('link'));
-                console.log("vmlink after parse");
-                console.log(vm.links);
+                ////console.log("vmlink after parse");
+                ////console.log(vm.links);
                 vm.totalItems = headers('X-Total-Count');
                 for (var i = 0; i < data.length; i++) {
                     vm.stories.push(data[i]);
@@ -69,17 +69,17 @@
                   vm.reverse = true;
                   vm.openFile = DataUtils.openFile;
                   vm.byteSize = DataUtils.byteSize;*/
-                  console.log("VMpredicate");
-                  console.log(vm.stories[0]);
-                  console.log(vm.predicate);
-                  console.log(vm.page);
-                  //console.log(vm.page0);
-                  console.log(vm.links);
-                  console.log(vm.reset);
-                  console.log(vm.reverse);
-                  console.log(vm.openFile);
-                  console.log(vm.byteSize);
-                  console.log(StoryController.$inject);
+                  ////console.log("VMpredicate");
+                  ////console.log(vm.stories[0]);
+                  ////console.log(vm.predicate);
+                  ////console.log(vm.page);
+                  //////console.log(vm.page0);
+                  ////console.log(vm.links);
+                  ////console.log(vm.reset);
+                  ////console.log(vm.reverse);
+                  ////console.log(vm.openFile);
+                  ////console.log(vm.byteSize);
+                  ////console.log(StoryController.$inject);
             }
 
             function onError(error) {
@@ -100,8 +100,8 @@
               if (vm.predicate !== 'id') {
                   result.push('id');
               }
-              //console.log(vm.predicate);
-              //console.log(result);
+              //////console.log(vm.predicate);
+              //////console.log(result);
               return result;
           }
           function onSuccess(data, headers){
@@ -110,8 +110,8 @@
             //for (var i = 0;i< data.length; i++){
             //  vm.storyOwner.push(data[i]);
            // }
-			  console.log(data);
-            console.log(vm.storyOwner);
+			  ////console.log(data);
+            ////console.log(vm.storyOwner);
           }
           function onError(error) {
               AlertService.error(error.data.message);
@@ -127,7 +127,7 @@
             vm.page = page;
             loadAll();
         }
-	console.log(Story);
-		console.log(StoryOwner);
+	//////console.log(Story);
+		//////console.log(StoryOwner);
     }
 })();

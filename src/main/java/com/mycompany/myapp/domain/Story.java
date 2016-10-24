@@ -6,23 +6,14 @@ import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
-//import com.mycompany.myapp.domain.User;
-//import java.util.Optional;
+
 /**
  * A Story.
  */
 @Entity
 @Table(name = "story")
 public class Story implements Serializable {
-    // private String name;
-    // private Optional<User> owner;
-    // public void setOwner(Optional<User> owner){
-    //   this.owner=owner;
-    //   System.out.println("*\n"+owner);
-    // }
-    // public Optional<User> getOwner(){
-    //   return this.owner;
-    // }
+
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -35,9 +26,6 @@ public class Story implements Serializable {
     @Lob
     @Column(name = "content")
     private String content;
-
-    @Column(name = "author_id")
-    private Long authorID;
 
     @Column(name = "author_name")
     private String authorName;
@@ -60,6 +48,9 @@ public class Story implements Serializable {
 
     @Column(name = "number_of_comment")
     private Integer numberOfComment;
+
+    @Column(name = "author")
+    private String author;
 
     public Long getId() {
         return id;
@@ -93,19 +84,6 @@ public class Story implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public Long getAuthorID() {
-        return authorID;
-    }
-
-    public Story authorID(Long authorID) {
-        this.authorID = authorID;
-        return this;
-    }
-
-    public void setAuthorID(Long authorID) {
-        this.authorID = authorID;
     }
 
     public String getAuthorName() {
@@ -199,6 +177,19 @@ public class Story implements Serializable {
         this.numberOfComment = numberOfComment;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public Story author(String author) {
+        this.author = author;
+        return this;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -225,7 +216,6 @@ public class Story implements Serializable {
             "id=" + id +
             ", title='" + title + "'" +
             ", content='" + content + "'" +
-            ", authorID='" + authorID + "'" +
             ", authorName='" + authorName + "'" +
             ", timeCreated='" + timeCreated + "'" +
             ", placeCreated='" + placeCreated + "'" +
@@ -233,6 +223,7 @@ public class Story implements Serializable {
             ", category='" + category + "'" +
             ", numberOfLove='" + numberOfLove + "'" +
             ", numberOfComment='" + numberOfComment + "'" +
+            ", author='" + author + "'" +
             '}';
     }
 }

@@ -29,10 +29,6 @@
                 <constraints nullable="true" />
             </column>
             
-            <column name="author_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-            
             <column name="author_name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -58,6 +54,10 @@
             </column>
             
             <column name="number_of_comment" type="integer">
+                <constraints nullable="true" />
+            </column>
+            
+            <column name="author" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             

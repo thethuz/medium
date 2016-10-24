@@ -37,6 +37,7 @@
 					<tr>
                     	<td >{{story.title}}</td>
 						<td >{{story.timeCreated | date:'medium'}}</td>
+						<td></td>
 					</tr>
 				<tr>
 					<td >{{story.timeCreated | date:'medium'}}</td>
@@ -44,14 +45,17 @@
 					<td >{{story.timeToRead}}</td>
 				</tr>
 				<tr>
-					<td >{{story.authorID}}</td>
-                    <td >{{story.authorName}}</td>
+					<!--td >{{story.authorID}}</td-->
+					<td>{{story.author}}</td>
+					<td></td>
+					<td >{{story.authorName}}</td>
 				</tr>
 				<tr>
                     <td >{{story.content}}</td>
 				</tr>
 				<tr>
 					<td >{{story.numberOfLove}}<div style="color:red">&#9829; </div></td>
+					<td></td>
 					<td >{{story.numberOfComment}} <div style="color:green;">response</div></td>
 				</tr>
                   <td >{{story.category}}</td>

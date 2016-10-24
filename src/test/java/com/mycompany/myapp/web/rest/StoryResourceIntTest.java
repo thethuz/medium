@@ -51,9 +51,6 @@ public class StoryResourceIntTest {
 
     private static final String DEFAULT_CONTENT = "AAAAA";
     private static final String UPDATED_CONTENT = "BBBBB";
-
-    private static final Long DEFAULT_AUTHOR_ID = 1L;
-    private static final Long UPDATED_AUTHOR_ID = 2L;
     private static final String DEFAULT_AUTHOR_NAME = "AAAAA";
     private static final String UPDATED_AUTHOR_NAME = "BBBBB";
 
@@ -73,6 +70,8 @@ public class StoryResourceIntTest {
 
     private static final Integer DEFAULT_NUMBER_OF_COMMENT = 1;
     private static final Integer UPDATED_NUMBER_OF_COMMENT = 2;
+    private static final String DEFAULT_AUTHOR = "AAAAA";
+    private static final String UPDATED_AUTHOR = "BBBBB";
 
     @Inject
     private StoryRepository storyRepository;
@@ -113,14 +112,14 @@ public class StoryResourceIntTest {
         Story story = new Story()
                 .title(DEFAULT_TITLE)
                 .content(DEFAULT_CONTENT)
-                .authorID(DEFAULT_AUTHOR_ID)
                 .authorName(DEFAULT_AUTHOR_NAME)
                 .timeCreated(DEFAULT_TIME_CREATED)
                 .placeCreated(DEFAULT_PLACE_CREATED)
                 .timeToRead(DEFAULT_TIME_TO_READ)
                 .category(DEFAULT_CATEGORY)
                 .numberOfLove(DEFAULT_NUMBER_OF_LOVE)
-                .numberOfComment(DEFAULT_NUMBER_OF_COMMENT);
+                .numberOfComment(DEFAULT_NUMBER_OF_COMMENT)
+                .author(DEFAULT_AUTHOR);
         return story;
     }
 
@@ -147,7 +146,6 @@ public class StoryResourceIntTest {
         Story testStory = stories.get(stories.size() - 1);
         assertThat(testStory.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testStory.getContent()).isEqualTo(DEFAULT_CONTENT);
-        assertThat(testStory.getAuthorID()).isEqualTo(DEFAULT_AUTHOR_ID);
         assertThat(testStory.getAuthorName()).isEqualTo(DEFAULT_AUTHOR_NAME);
         assertThat(testStory.getTimeCreated()).isEqualTo(DEFAULT_TIME_CREATED);
         assertThat(testStory.getPlaceCreated()).isEqualTo(DEFAULT_PLACE_CREATED);
@@ -155,6 +153,7 @@ public class StoryResourceIntTest {
         assertThat(testStory.getCategory()).isEqualTo(DEFAULT_CATEGORY);
         assertThat(testStory.getNumberOfLove()).isEqualTo(DEFAULT_NUMBER_OF_LOVE);
         assertThat(testStory.getNumberOfComment()).isEqualTo(DEFAULT_NUMBER_OF_COMMENT);
+        assertThat(testStory.getAuthor()).isEqualTo(DEFAULT_AUTHOR);
     }
 
     @Test
@@ -170,14 +169,14 @@ public class StoryResourceIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(story.getId().intValue())))
                 .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
                 .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
-                .andExpect(jsonPath("$.[*].authorID").value(hasItem(DEFAULT_AUTHOR_ID.intValue())))
                 .andExpect(jsonPath("$.[*].authorName").value(hasItem(DEFAULT_AUTHOR_NAME.toString())))
                 .andExpect(jsonPath("$.[*].timeCreated").value(hasItem(DEFAULT_TIME_CREATED_STR)))
                 .andExpect(jsonPath("$.[*].placeCreated").value(hasItem(DEFAULT_PLACE_CREATED.toString())))
                 .andExpect(jsonPath("$.[*].timeToRead").value(hasItem(DEFAULT_TIME_TO_READ)))
                 .andExpect(jsonPath("$.[*].category").value(hasItem(DEFAULT_CATEGORY.toString())))
                 .andExpect(jsonPath("$.[*].numberOfLove").value(hasItem(DEFAULT_NUMBER_OF_LOVE)))
-                .andExpect(jsonPath("$.[*].numberOfComment").value(hasItem(DEFAULT_NUMBER_OF_COMMENT)));
+                .andExpect(jsonPath("$.[*].numberOfComment").value(hasItem(DEFAULT_NUMBER_OF_COMMENT)))
+                .andExpect(jsonPath("$.[*].author").value(hasItem(DEFAULT_AUTHOR.toString())));
     }
 
     @Test
@@ -193,14 +192,14 @@ public class StoryResourceIntTest {
             .andExpect(jsonPath("$.id").value(story.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE.toString()))
             .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT.toString()))
-            .andExpect(jsonPath("$.authorID").value(DEFAULT_AUTHOR_ID.intValue()))
             .andExpect(jsonPath("$.authorName").value(DEFAULT_AUTHOR_NAME.toString()))
             .andExpect(jsonPath("$.timeCreated").value(DEFAULT_TIME_CREATED_STR))
             .andExpect(jsonPath("$.placeCreated").value(DEFAULT_PLACE_CREATED.toString()))
             .andExpect(jsonPath("$.timeToRead").value(DEFAULT_TIME_TO_READ))
             .andExpect(jsonPath("$.category").value(DEFAULT_CATEGORY.toString()))
             .andExpect(jsonPath("$.numberOfLove").value(DEFAULT_NUMBER_OF_LOVE))
-            .andExpect(jsonPath("$.numberOfComment").value(DEFAULT_NUMBER_OF_COMMENT));
+            .andExpect(jsonPath("$.numberOfComment").value(DEFAULT_NUMBER_OF_COMMENT))
+            .andExpect(jsonPath("$.author").value(DEFAULT_AUTHOR.toString()));
     }
 
     @Test
@@ -224,14 +223,14 @@ public class StoryResourceIntTest {
         updatedStory
                 .title(UPDATED_TITLE)
                 .content(UPDATED_CONTENT)
-                .authorID(UPDATED_AUTHOR_ID)
                 .authorName(UPDATED_AUTHOR_NAME)
                 .timeCreated(UPDATED_TIME_CREATED)
                 .placeCreated(UPDATED_PLACE_CREATED)
                 .timeToRead(UPDATED_TIME_TO_READ)
                 .category(UPDATED_CATEGORY)
                 .numberOfLove(UPDATED_NUMBER_OF_LOVE)
-                .numberOfComment(UPDATED_NUMBER_OF_COMMENT);
+                .numberOfComment(UPDATED_NUMBER_OF_COMMENT)
+                .author(UPDATED_AUTHOR);
 
         restStoryMockMvc.perform(put("/api/stories")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -244,7 +243,6 @@ public class StoryResourceIntTest {
         Story testStory = stories.get(stories.size() - 1);
         assertThat(testStory.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testStory.getContent()).isEqualTo(UPDATED_CONTENT);
-        assertThat(testStory.getAuthorID()).isEqualTo(UPDATED_AUTHOR_ID);
         assertThat(testStory.getAuthorName()).isEqualTo(UPDATED_AUTHOR_NAME);
         assertThat(testStory.getTimeCreated()).isEqualTo(UPDATED_TIME_CREATED);
         assertThat(testStory.getPlaceCreated()).isEqualTo(UPDATED_PLACE_CREATED);
@@ -252,6 +250,7 @@ public class StoryResourceIntTest {
         assertThat(testStory.getCategory()).isEqualTo(UPDATED_CATEGORY);
         assertThat(testStory.getNumberOfLove()).isEqualTo(UPDATED_NUMBER_OF_LOVE);
         assertThat(testStory.getNumberOfComment()).isEqualTo(UPDATED_NUMBER_OF_COMMENT);
+        assertThat(testStory.getAuthor()).isEqualTo(UPDATED_AUTHOR);
     }
 
     @Test
