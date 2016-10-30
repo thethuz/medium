@@ -95,18 +95,18 @@
                     resolve: {
                         entity: function () {
                             return {
-                                title: null,
-                                content: null,
-                                authorName: null,
-                                timeCreated: null,
-                                placeCreated: null,
-                                timeToRead: null,
-                                category: null,
-                                numberOfLove: 0,
-                                numberOfComment: 0,
-                                author: null,
-                                id: null
-                            };
+                                title: null,//done
+                                content: null,//done
+                                authorName: null,//users.firstName+users.lastName;
+                                timeCreated: null,//=Date()
+                                placeCreated: null,//chua lam duoc
+                                timeToRead: null,//=content.length/270.toInt()
+                                category: null,//chua lam duoc
+                                numberOfLove: 0,//sẽ làm đc ở trong story.html và story-detail.html
+                                numberOfComment: 0,//cái này đang tâm tư
+                                author: null,//users.login
+                                id: null//ez có sẵn
+                             };
                         }
                     }
                 }).result.then(function() {

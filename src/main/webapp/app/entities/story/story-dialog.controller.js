@@ -39,8 +39,8 @@ User.get({userId:123})
     *
     **/
 		//vm.author=loadOwner();
-    	
-		
+
+
 		//console.log(StoryOwner.onSuccess);
 		//loadOwner();
 		//console.log(vm.author);
@@ -54,7 +54,9 @@ User.get({userId:123})
         }
 
         function save () {
-
+          var contentLength=vm.story.content.length;
+          var titleLength=vm.story.title.length;
+          if ((contentLength<5*titleLength)||(titleLength<1)||(contentLength<300));
 		var User = $resource('api/account',{},{'charge':{method:'GET'}});
 		//console.log(User);
 		$scope.user=User.get({activated: true});
@@ -62,10 +64,12 @@ User.get({userId:123})
 			/**/
 			vm.story.author=data.login;
 			vm.story.authorName=data.firstName+" "+data.lastName;
+      vm.story.timeCreated=Date();
+      vm.story.timeToRead=(contentLength/270).toFixed(0);
 			console.log(vm.story);
 			vm.isSaving = true;
             if (vm.story.id !== null) {
-				
+
                 Story.update(vm.story, onSaveSuccess, onSaveError);
 				console.log(vm.story);
             } else {
@@ -83,18 +87,18 @@ User.get({userId:123})
 			}
 			console.log(data);
 		});
-		
-			
-            
+
+
+
         }
 
-        
+
 
         vm.datePickerOpenStatus.timeCreated = false;
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
-		
+
     }
 })();
