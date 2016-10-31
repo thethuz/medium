@@ -19,6 +19,7 @@
 
         Principal.identity().then(function(account) {
             vm.account = account;
+            console.log(vm.account);
         });
 
         function invalidate (series) {

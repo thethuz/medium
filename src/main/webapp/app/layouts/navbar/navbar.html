@@ -12,7 +12,7 @@
                 <span>edium</span> <span class="navbar-version">v{{VERSION}}</span>
             </a>
         </div>
-	
+
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
             <ul class="nav navbar-nav navbar-right">
                 <li ui-sref-active="active">
@@ -43,16 +43,16 @@
                       <span>
                           <!--<span class="glyphicon glyphicon-th-list"></span>-->
                           <span class="hidden-sm">
-                            
+
                                     <!--<span class="glyphicon glyphicon-asterisk"></span>-->&nbsp;
                                     <span >Write your Story</span>
-                            
+
                           </span>
                           <!--<b class="caret"></b>-->
                       </span>
                   </a>
                 </li>
-		
+
                 <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
                         <span>

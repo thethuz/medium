@@ -1,4 +1,19 @@
 <div>
+	<!---->
+	<div ng-cloak>
+    <div class="row">
+        
+            <div ng-switch="vm.isAuthenticated()">
+                <div class="alert alert-success" ng-switch-when="true">
+					
+                    You are logged in as user "{{vm.account.login}}".
+					
+                </div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<!---->
     <!--<h2>Stories</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
@@ -16,22 +31,15 @@
     <br/>-->
     <div class="table-responsive">
         <table class="jh-table table table-striped">
-            <!--thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-					<th><span>Title</span></th>
-					<th><span>Content</span></th>
-					<th><span>Author ID</span></th>
-					<th><span>Author Name</span></th>
-		           	<th><span>Time Created</span></th>
-					<th><span>Place Created</span></th> 
-					<th><span>Time To Read</span></th> 
-					<th><span>Category</span></th> 
-					<th><span>Number Of Love</span></th>
-					<th><span>Number Of Comment</span></th> 
-				</tr>
-            </thead-->
+            <!--
+
+		LÀM THẾ NÀO ĐIỀU KHIỂN 1 THẺ HTML BẰNG JAVASCRIPT
+
+
+-->
             <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']" ng-repeat="story in vm.stories track by story.id">
-                
+
+
 					<!--Dòng này lý giải tại sao lại gọi đc story-->
                     <td style="color:blue;"><a ui-sref="story-detail({id:story.id})">{{story.id}}</a></td>
 					<tr>
@@ -46,7 +54,7 @@
 				</tr>
 				<tr>
 					<!--td >{{story.authorID}}</td-->
-					<td>{{story.author}}</td>
+					<td>{{xxx==story.author-vm.account.login}}</td>
 					<td></td>
 					<td >{{story.authorName}}</td>
 				</tr>
@@ -59,7 +67,8 @@
 					<td >{{story.numberOfComment}} <div style="color:green;">response</div></td>
 				</tr>
                   <td >{{story.category}}</td>
-					
+				<td>{{vm.account.login}}</td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -82,7 +91,7 @@
                             </button>
                         </div>
                     </td>
-                
+
                 <!--tr ng-repeat="user in vm.storyOwner track by user.id"><!--Dòng này lý giải tại sao lại gọi đc story-->
                     <tr>
                 </tr>

@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/story',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_GUEST'],
                 pageTitle: 'Stories'
             },
             views: {
@@ -30,7 +30,7 @@
             parent: 'entity',
             url: '/story/{id}',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_GUEST'],
                 pageTitle: 'Story'
             },
             views: {
@@ -122,7 +122,12 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            onEnter: ['$stateParams', '$state', '$uibModal', '$resource', function($stateParams, $state, $uibModal, $resource) {
+				/*var User=var User = $resource('api/account',{},{'charge':{method:'GET'}});
+				//console.log(User);
+				$scope.user=User.get({activated: true});
+				$scope.user.$promise.then(function(data){
+					if (data.login==*/
                 $uibModal.open({
                     templateUrl: 'app/entities/story/story-dialog.html',
                     controller: 'StoryDialogController',

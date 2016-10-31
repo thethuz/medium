@@ -12,10 +12,6 @@
             "fieldTypeBlobContent": "text"
         },
         {
-            "fieldName": "authorID",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "authorName",
             "fieldType": "String"
         },
@@ -46,6 +42,10 @@
         {
             "fieldName": "numberOfComment",
             "fieldType": "Integer"
+        },
+        {
+            "fieldName": "author",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20161017092230",

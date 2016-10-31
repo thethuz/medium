@@ -16,15 +16,24 @@
         vm.register = register;
         $scope.$on('authenticationSuccess', function() {
             getAccount();
+			console.log(vm.account);
+			console.log(vm.isAuthenticated);
+			console.log(vm.login);
         });
 
         getAccount();
+
 
         function getAccount() {
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
+				console.log(Principal);
+				console.log(vm.account);
+				console.log(vm.isAuthenticated);
             });
+
+			//console.log(vm.isAuthenticated());
         }
         function register () {
             $state.go('register');
