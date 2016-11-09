@@ -5,9 +5,9 @@
         .module('mediumApp')
         .controller('StoryDialogController', StoryDialogController);
 
-    StoryDialogController.$inject = ['$timeout', '$scope', '$stateParams','$resource', '$uibModalInstance', 'DataUtils', 'entity', 'Story'];
+    StoryDialogController.$inject = ['$state','$timeout', '$scope', '$stateParams','$resource', '$uibModalInstance', 'DataUtils', 'entity', 'Story'];
 
-    function StoryDialogController ($timeout, $scope, $stateParams, $resource, $uibModalInstance, DataUtils, entity, Story) {
+    function StoryDialogController ($state, $timeout, $scope, $stateParams, $resource, $uibModalInstance, DataUtils, entity, Story) {
         var vm = this;
 		//console.log(loadOwner().onSuccess());
         vm.story = entity;
@@ -17,40 +17,13 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-		     // vm.author={}
-          /**
-          *
-          var User = $resource('/user/:userId', {userId:'@id'});
-User.get({userId:123}, function(user, getResponseHeaders){
-  user.abc = true;
-  user.$save(function(user, putResponseHeaders) {
-    //user => saved user object
-    //putResponseHeaders => $http header getter
-  });
-});
 
-You can also access the raw $http promise via the $promise property on the object returned
-
-var User = $resource('/user/:userId', {userId:'@id'});
-User.get({userId:123})
-    .$promise.then(function(user) {
-      $scope.user = user;
-    });
-    *
-    **/
-		//vm.author=loadOwner();
-
-
-		//console.log(StoryOwner.onSuccess);
-		//loadOwner();
-		//console.log(vm.author);
-		//console.log(Object.prototype.toString.apply(vm.author));
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
+            //$uibModalInstance.dismiss('cancel');
         }
 
         function save () {
@@ -64,8 +37,9 @@ User.get({userId:123})
 			/**/
 			vm.story.author=data.login;
 			vm.story.authorName=data.firstName+" "+data.lastName;
-      vm.story.timeCreated=Date();
-      vm.story.timeToRead=(contentLength/270).toFixed(0);
+			//vm.story.timeCreated=Date();
+			vm.story.imglink='xxx.com';
+			vm.story.timeToRead=(contentLength/270).toFixed(0);
 			console.log(vm.story);
 			vm.isSaving = true;
             if (vm.story.id !== null) {
@@ -79,7 +53,8 @@ User.get({userId:123})
 			function onSaveSuccess (result) {
 				$scope.$emit('mediumApp:storyUpdate', result);
 				$uibModalInstance.close(result);
-				vm.isSaving = false;
+				$state.go('story', null, { reload: 'story' });
+				//vm.isSaving = false;
         	}
 
 			function onSaveError () {
@@ -87,15 +62,8 @@ User.get({userId:123})
 			}
 			console.log(data);
 		});
-
-
-
         }
-
-
-
         vm.datePickerOpenStatus.timeCreated = false;
-
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }

@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/story',
             data: {
-                authorities: ['ROLE_GUEST'],
+                authorities: ['ROLE_USER'],
                 pageTitle: 'Stories'
             },
             views: {
@@ -30,7 +30,7 @@
             parent: 'entity',
             url: '/story/{id}',
             data: {
-                authorities: ['ROLE_GUEST'],
+                authorities: ['ROLE_USER'],
                 pageTitle: 'Story'
             },
             views: {
@@ -73,8 +73,10 @@
                         }]
                     }
                 }).result.then(function() {
+					
                     $state.go('^', {}, { reload: false });
                 }, function() {
+					console.log("$state.go^");
                     $state.go('^');
                 });
             }]
@@ -110,8 +112,10 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('story', null, { reload: 'story' });
+					console.log("$state.go reload:story");
+                    //$state.go('story', null, { reload: 'story' });
                 }, function() {
+					console.log("$state.go ^");
                     $state.go('story');
                 });
             }]

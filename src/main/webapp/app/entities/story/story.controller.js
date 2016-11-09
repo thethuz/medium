@@ -4,14 +4,14 @@
     angular
         .module('mediumApp')
         .controller('StoryController', StoryController);
-	//////console.log("goi StoryController.inject");
-    StoryController.$inject = ['$scope', '$state', 'DataUtils','Principal', 'LoginService', 'Story', 'ParseLinks', 'AlertService','$resource'];
-	////console.log("goi StoryController");
-	////console.log(StoryController);
-    function StoryController ($scope, $state, DataUtils, Principal, LoginService, Story, ParseLinks, AlertService, $resource) {
+	
+    StoryController.$inject = ['$scope', '$state', '$timeout', '$stateParams' ,'DataUtils','Principal', 'LoginService', 'Story', 'ParseLinks', 'AlertService','$resource'];
+	
+    function StoryController ($scope, $state,  $timeout, $stateParams, DataUtils, Principal, LoginService, Story, ParseLinks, AlertService, $resource) {
+		//$state, $timeout, $scope, $stateParams, $resource, $uibModalInstance, DataUtils, entity, Story
 
-	var vm = this;
-	vm.stories = [];
+		var vm = this;
+		vm.stories = [];
         vm.loadPage = loadPage;
         vm.page = 0;
         vm.pageO = 0;
@@ -28,7 +28,7 @@
 			console.log(vm.isAuthenticated);
 			console.log(vm.login);
         });
-        //svar vm.user.login;
+        
         vm.predicate = 'id';
         vm.reset = reset;
         vm.reverse = true;
@@ -36,14 +36,9 @@
         vm.byteSize = DataUtils.byteSize;
         loadAll();
 		getAccount();
-/**
-*
-*
-*	CREATE A USER UNKNOWN
-*
-*
-**/
-        function loadAll () {
+
+        function loadAll () 
+		{
           console.log("load");
           Story.query({
                 page: vm.page,
@@ -55,21 +50,19 @@
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
-		console.log("sort");
+				console.log("sort");
                 return result;
             }
-
-            function onSuccess(data, headers) {
-		vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
+				function onSuccess(data, headers) {
+					vm.links = ParseLinks.parse(headers('link'));
+					vm.totalItems = headers('X-Total-Count');
                 for (var i = 0; i < data.length; i++) {
                     vm.stories.push(data[i]);
                 }
-		console.log("onSuccess");
+				console.log("onSuccess");
             }
 
             function onError(error) {
-
                 AlertService.error(error.data.message);
                 console.log(error.data.message);
             }
@@ -82,9 +75,61 @@
 				console.log(vm.account);
 				console.log(vm.isAuthenticated);
             });
-
-			//console.log(vm.isAuthenticated());
         }
+		vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        //vm.openCalendar = openCalendar;
+        vm.byteSize = DataUtils.byteSize;
+        vm.openFile = DataUtils.openFile;
+        vm.save = save;
+
+        $timeout(function (){
+            angular.element('.form-group:eq(1)>input').focus();
+        });
+
+        function clear () {
+            //$uibModalInstance.dismiss('cancel');
+        }
+
+        function save () {
+          var contentLength=vm.story.content.length;
+          var titleLength=vm.story.title.length;
+          if ((contentLength<5*titleLength)||(titleLength<1)||(contentLength<300));
+		var User = $resource('api/account',{},{'charge':{method:'GET'}});
+		//console.log(User);
+		$scope.user=User.get({activated: true});
+		$scope.user.$promise.then(function(data){
+			/**/
+			vm.story.author=data.login;
+			vm.story.authorName=data.firstName+" "+data.lastName;
+			//vm.story.timeCreated=Date();
+			vm.story.imglink='xxx.com';
+			vm.story.timeToRead=(contentLength/270).toFixed(0);
+			console.log(vm.story);
+			vm.isSaving = true;
+            if (vm.story.id !== null) {
+
+                Story.update(vm.story, onSaveSuccess, onSaveError);
+				console.log(vm.story);
+            } else {
+                Story.save(vm.story, onSaveSuccess, onSaveError);
+				console.log(vm.story);
+            }
+			function onSaveSuccess (result) {
+				$scope.$emit('mediumApp:storyUpdate', result);
+				//$uibModalInstance.close(result);
+				$state.go('story', null, { reload: 'story' });
+				//vm.isSaving = false;
+        	}
+
+			function onSaveError () {
+				vm.isSaving = false;
+			}
+			console.log(data);
+		});
+        }
+        //vm.datePickerOpenStatus.timeCreated = false;
+		
         function reset () {
             vm.page = 0;
             vm.stories = [];
@@ -95,7 +140,6 @@
             vm.page = page;
             loadAll();
         }
-	//////console.log(Story);
-		//////console.log(StoryOwner);
+	
     }
 })();
