@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span>Usercomment</span> {{vm.usercomment.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Story ID</span></dt>
+        <dd>
+            <span>{{vm.usercomment.storyID}}</span>
+        </dd>
+        <dt><span>Comment Content</span></dt>
+        <dd>
+            <span>{{vm.usercomment.commentContent}}</span>
+        </dd>
+        <dt><span>User Comment ID</span></dt>
+        <dd>
+            <span>{{vm.usercomment.userCommentID}}</span>
+        </dd>
+        <dt><span>User Comment Name</span></dt>
+        <dd>
+            <span>{{vm.usercomment.userCommentName}}</span>
+        </dd>
+        <dt><span>Time Commented</span></dt>
+        <dd>
+            <span>{{vm.usercomment.timeCommented | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="usercomment-detail.edit({id:vm.usercomment.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>
