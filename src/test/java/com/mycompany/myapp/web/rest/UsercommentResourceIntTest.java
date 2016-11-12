@@ -4,7 +4,6 @@ import com.mycompany.myapp.MediumApp;
 
 import com.mycompany.myapp.domain.Usercomment;
 import com.mycompany.myapp.repository.UsercommentRepository;
-import com.mycompany.myapp.service.UsercommentService;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,18 +54,17 @@ public class UsercommentResourceIntTest {
 
     private static final Integer DEFAULT_USER_COMMENT_ID = 1;
     private static final Integer UPDATED_USER_COMMENT_ID = 2;
-    private static final String DEFAULT_USER_COMMENT_NAME = "AAAAA";
-    private static final String UPDATED_USER_COMMENT_NAME = "BBBBB";
+    private static final String DEFAULT_USER_IMG_LINK = "AAAAA";
+    private static final String UPDATED_USER_IMG_LINK = "BBBBB";
 
     private static final ZonedDateTime DEFAULT_TIME_COMMENTED = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneId.systemDefault());
     private static final ZonedDateTime UPDATED_TIME_COMMENTED = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
     private static final String DEFAULT_TIME_COMMENTED_STR = dateTimeFormatter.format(DEFAULT_TIME_COMMENTED);
+    private static final String DEFAULT_USER_COMMENT_NAME = "AAAAA";
+    private static final String UPDATED_USER_COMMENT_NAME = "BBBBB";
 
     @Inject
     private UsercommentRepository usercommentRepository;
-
-    @Inject
-    private UsercommentService usercommentService;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -85,7 +83,7 @@ public class UsercommentResourceIntTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         UsercommentResource usercommentResource = new UsercommentResource();
-        ReflectionTestUtils.setField(usercommentResource, "usercommentService", usercommentService);
+        ReflectionTestUtils.setField(usercommentResource, "usercommentRepository", usercommentRepository);
         this.restUsercommentMockMvc = MockMvcBuilders.standaloneSetup(usercommentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -102,8 +100,9 @@ public class UsercommentResourceIntTest {
                 .storyID(DEFAULT_STORY_ID)
                 .commentContent(DEFAULT_COMMENT_CONTENT)
                 .userCommentID(DEFAULT_USER_COMMENT_ID)
-                .userCommentName(DEFAULT_USER_COMMENT_NAME)
-                .timeCommented(DEFAULT_TIME_COMMENTED);
+                .userImgLink(DEFAULT_USER_IMG_LINK)
+                .timeCommented(DEFAULT_TIME_COMMENTED)
+                .userCommentName(DEFAULT_USER_COMMENT_NAME);
         return usercomment;
     }
 
@@ -131,8 +130,9 @@ public class UsercommentResourceIntTest {
         assertThat(testUsercomment.getStoryID()).isEqualTo(DEFAULT_STORY_ID);
         assertThat(testUsercomment.getCommentContent()).isEqualTo(DEFAULT_COMMENT_CONTENT);
         assertThat(testUsercomment.getUserCommentID()).isEqualTo(DEFAULT_USER_COMMENT_ID);
-        assertThat(testUsercomment.getUserCommentName()).isEqualTo(DEFAULT_USER_COMMENT_NAME);
+        assertThat(testUsercomment.getUserImgLink()).isEqualTo(DEFAULT_USER_IMG_LINK);
         assertThat(testUsercomment.getTimeCommented()).isEqualTo(DEFAULT_TIME_COMMENTED);
+        assertThat(testUsercomment.getUserCommentName()).isEqualTo(DEFAULT_USER_COMMENT_NAME);
     }
 
     @Test
@@ -149,8 +149,9 @@ public class UsercommentResourceIntTest {
                 .andExpect(jsonPath("$.[*].storyID").value(hasItem(DEFAULT_STORY_ID)))
                 .andExpect(jsonPath("$.[*].commentContent").value(hasItem(DEFAULT_COMMENT_CONTENT.toString())))
                 .andExpect(jsonPath("$.[*].userCommentID").value(hasItem(DEFAULT_USER_COMMENT_ID)))
-                .andExpect(jsonPath("$.[*].userCommentName").value(hasItem(DEFAULT_USER_COMMENT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].timeCommented").value(hasItem(DEFAULT_TIME_COMMENTED_STR)));
+                .andExpect(jsonPath("$.[*].userImgLink").value(hasItem(DEFAULT_USER_IMG_LINK.toString())))
+                .andExpect(jsonPath("$.[*].timeCommented").value(hasItem(DEFAULT_TIME_COMMENTED_STR)))
+                .andExpect(jsonPath("$.[*].userCommentName").value(hasItem(DEFAULT_USER_COMMENT_NAME.toString())));
     }
 
     @Test
@@ -167,8 +168,9 @@ public class UsercommentResourceIntTest {
             .andExpect(jsonPath("$.storyID").value(DEFAULT_STORY_ID))
             .andExpect(jsonPath("$.commentContent").value(DEFAULT_COMMENT_CONTENT.toString()))
             .andExpect(jsonPath("$.userCommentID").value(DEFAULT_USER_COMMENT_ID))
-            .andExpect(jsonPath("$.userCommentName").value(DEFAULT_USER_COMMENT_NAME.toString()))
-            .andExpect(jsonPath("$.timeCommented").value(DEFAULT_TIME_COMMENTED_STR));
+            .andExpect(jsonPath("$.userImgLink").value(DEFAULT_USER_IMG_LINK.toString()))
+            .andExpect(jsonPath("$.timeCommented").value(DEFAULT_TIME_COMMENTED_STR))
+            .andExpect(jsonPath("$.userCommentName").value(DEFAULT_USER_COMMENT_NAME.toString()));
     }
 
     @Test
@@ -183,8 +185,7 @@ public class UsercommentResourceIntTest {
     @Transactional
     public void updateUsercomment() throws Exception {
         // Initialize the database
-        usercommentService.save(usercomment);
-
+        usercommentRepository.saveAndFlush(usercomment);
         int databaseSizeBeforeUpdate = usercommentRepository.findAll().size();
 
         // Update the usercomment
@@ -193,8 +194,9 @@ public class UsercommentResourceIntTest {
                 .storyID(UPDATED_STORY_ID)
                 .commentContent(UPDATED_COMMENT_CONTENT)
                 .userCommentID(UPDATED_USER_COMMENT_ID)
-                .userCommentName(UPDATED_USER_COMMENT_NAME)
-                .timeCommented(UPDATED_TIME_COMMENTED);
+                .userImgLink(UPDATED_USER_IMG_LINK)
+                .timeCommented(UPDATED_TIME_COMMENTED)
+                .userCommentName(UPDATED_USER_COMMENT_NAME);
 
         restUsercommentMockMvc.perform(put("/api/usercomments")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -208,16 +210,16 @@ public class UsercommentResourceIntTest {
         assertThat(testUsercomment.getStoryID()).isEqualTo(UPDATED_STORY_ID);
         assertThat(testUsercomment.getCommentContent()).isEqualTo(UPDATED_COMMENT_CONTENT);
         assertThat(testUsercomment.getUserCommentID()).isEqualTo(UPDATED_USER_COMMENT_ID);
-        assertThat(testUsercomment.getUserCommentName()).isEqualTo(UPDATED_USER_COMMENT_NAME);
+        assertThat(testUsercomment.getUserImgLink()).isEqualTo(UPDATED_USER_IMG_LINK);
         assertThat(testUsercomment.getTimeCommented()).isEqualTo(UPDATED_TIME_COMMENTED);
+        assertThat(testUsercomment.getUserCommentName()).isEqualTo(UPDATED_USER_COMMENT_NAME);
     }
 
     @Test
     @Transactional
     public void deleteUsercomment() throws Exception {
         // Initialize the database
-        usercommentService.save(usercomment);
-
+        usercommentRepository.saveAndFlush(usercomment);
         int databaseSizeBeforeDelete = usercommentRepository.findAll().size();
 
         // Get the usercomment

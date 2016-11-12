@@ -98,8 +98,9 @@
                                 storyID: null,
                                 commentContent: null,
                                 userCommentID: null,
-                                userCommentName: null,
+                                userImgLink: null,
                                 timeCommented: null,
+                                userCommentName: null,
                                 id: null
                             };
                         }

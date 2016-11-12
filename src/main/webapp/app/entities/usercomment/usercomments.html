@@ -17,24 +17,26 @@
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="storyID"><span>Story ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="commentContent"><span>Comment Content</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="userCommentID"><span>User Comment ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="userCommentName"><span>User Comment Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="timeCommented"><span>Time Commented</span> <span class="glyphicon glyphicon-sort"></span></th>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Story ID</span></th>
+                    <th><span>Comment Content</span></th>
+                    <th><span>User Comment ID</span></th>
+                    <th><span>User Img Link</span></th>
+                    <th><span>Time Commented</span></th>
+                    <th><span>User Comment Name</span></th>
                     <th></th>
                 </tr>
             </thead>
-            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+            <tbody>
                 <tr ng-repeat="usercomment in vm.usercomments track by usercomment.id">
                     <td><a ui-sref="usercomment-detail({id:usercomment.id})">{{usercomment.id}}</a></td>
                     <td>{{usercomment.storyID}}</td>
                     <td>{{usercomment.commentContent}}</td>
                     <td>{{usercomment.userCommentID}}</td>
-                    <td>{{usercomment.userCommentName}}</td>
+                    <td>{{usercomment.userImgLink}}</td>
                     <td>{{usercomment.timeCommented | date:'medium'}}</td>
+                    <td>{{usercomment.userCommentName}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

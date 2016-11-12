@@ -29,11 +29,14 @@ public class Usercomment implements Serializable {
     @Column(name = "user_comment_id")
     private Integer userCommentID;
 
-    @Column(name = "user_comment_name")
-    private String userCommentName;
+    @Column(name = "user_img_link")
+    private String userImgLink;
 
     @Column(name = "time_commented")
     private ZonedDateTime timeCommented;
+
+    @Column(name = "user_comment_name")
+    private String userCommentName;
 
     public Long getId() {
         return id;
@@ -82,17 +85,17 @@ public class Usercomment implements Serializable {
         this.userCommentID = userCommentID;
     }
 
-    public String getUserCommentName() {
-        return userCommentName;
+    public String getUserImgLink() {
+        return userImgLink;
     }
 
-    public Usercomment userCommentName(String userCommentName) {
-        this.userCommentName = userCommentName;
+    public Usercomment userImgLink(String userImgLink) {
+        this.userImgLink = userImgLink;
         return this;
     }
 
-    public void setUserCommentName(String userCommentName) {
-        this.userCommentName = userCommentName;
+    public void setUserImgLink(String userImgLink) {
+        this.userImgLink = userImgLink;
     }
 
     public ZonedDateTime getTimeCommented() {
@@ -106,6 +109,19 @@ public class Usercomment implements Serializable {
 
     public void setTimeCommented(ZonedDateTime timeCommented) {
         this.timeCommented = timeCommented;
+    }
+
+    public String getUserCommentName() {
+        return userCommentName;
+    }
+
+    public Usercomment userCommentName(String userCommentName) {
+        this.userCommentName = userCommentName;
+        return this;
+    }
+
+    public void setUserCommentName(String userCommentName) {
+        this.userCommentName = userCommentName;
     }
 
     @Override
@@ -135,8 +151,9 @@ public class Usercomment implements Serializable {
             ", storyID='" + storyID + "'" +
             ", commentContent='" + commentContent + "'" +
             ", userCommentID='" + userCommentID + "'" +
-            ", userCommentName='" + userCommentName + "'" +
+            ", userImgLink='" + userImgLink + "'" +
             ", timeCommented='" + timeCommented + "'" +
+            ", userCommentName='" + userCommentName + "'" +
             '}';
     }
 }
