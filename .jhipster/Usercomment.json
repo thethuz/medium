@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "storyID",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "commentContent",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "text"
+        },
+        {
+            "fieldName": "userCommentID",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "userImgLink",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "timeCommented",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "userCommentName",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161112064432",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "usercomment",
+    "pagination": "no"
+}
