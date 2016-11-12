@@ -101,13 +101,16 @@ public class StoryResource {
     }
     /**
     *get All storywith author
-    *
+    */
     @RequestMapping(value = "/stories/author/{author}",
         method= RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Story>> getAllStoriesByAuthor() throws URISyntaxException{
-      System.out.println("\nRequest to get AllStories with author")
+    public ResponseEntity<List<Story>> getAllStoriesByAuthor(String author) throws URISyntaxException{
+      System.out.println("\nRequest to get AllStories with author");
+      List<Story> list = storyService.findAllByAuthor(author);
+      HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(list, "api/stories");
+      return new ResponseEntity<>(list.getContent(), headers, HttpStatus.OK);
     }
 
     /**
