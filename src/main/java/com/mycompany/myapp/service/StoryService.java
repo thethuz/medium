@@ -20,7 +20,7 @@ import java.util.List;
 public class StoryService {
 
     private final Logger log = LoggerFactory.getLogger(StoryService.class);
-    
+
     @Inject
     private StoryRepository storyRepository;
 
@@ -38,24 +38,49 @@ public class StoryService {
 
     /**
      *  Get all the stories.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Story> findAll(Pageable pageable) {
         log.debug("Request to get all Stories");
+        System.out.println("\nStoryService.findAll"+pageable+"");
+
         Page<Story> result = storyRepository.findAll(pageable);
         return result;
     }
-
+    /**
+    *findAllByUserOwner
+    */
+    @Transactional(readOnly = true)
+    public List<Story> findAllByAuthor(String author){
+      List<Story> result = storyRepository.findAllByAuthor("admin");
+      return result;
+    }
+    /**
+    *findAllByCategory
+    */
+    @Transactional(readOnly = true)
+    public List<Story> findAllByCategory(String category){
+      List<Story> result = storyRepository.findAllByCategory("xx");
+      return result;
+    }
+    /**
+    *findAllByDate
+    *
+    @Transactional(readOnly = true)
+    public List<Story> findAllByDate(String date){
+      List<Story> result = storyRepository.findAllByDate("today");
+      return result;
+    }
     /**
      *  Get one story by id.
      *
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Story findOne(Long id) {
         log.debug("Request to get Story : {}", id);
         Story story = storyRepository.findOne(id);

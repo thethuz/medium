@@ -30,7 +30,7 @@ import java.util.Optional;
 public class StoryResource {
 
     private final Logger log = LoggerFactory.getLogger(StoryResource.class);
-        
+
     @Inject
     private StoryService storyService;
 
@@ -93,10 +93,21 @@ public class StoryResource {
     @Timed
     public ResponseEntity<List<Story>> getAllStories(Pageable pageable)
         throws URISyntaxException {
+        System.out.println("\ngetAllStories : "+pageable);
         log.debug("REST request to get a page of Stories");
         Page<Story> page = storyService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/stories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+    *get All storywith author
+    *
+    @RequestMapping(value = "/stories/author/{author}",
+        method= RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Story>> getAllStoriesByAuthor() throws URISyntaxException{
+      System.out.println("\nRequest to get AllStories with author")
     }
 
     /**

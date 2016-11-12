@@ -27,7 +27,7 @@ import java.util.Optional;
 public class UsercommentResource {
 
     private final Logger log = LoggerFactory.getLogger(UsercommentResource.class);
-        
+
     @Inject
     private UsercommentRepository usercommentRepository;
 
@@ -89,6 +89,9 @@ public class UsercommentResource {
     public List<Usercomment> getAllUsercomments() {
         log.debug("REST request to get all Usercomments");
         List<Usercomment> usercomments = usercommentRepository.findAll();
+        System.out.println("\nUsercommentResource");
+        System.out.println(usercomments);
+        System.out.println("END;");
         return usercomments;
     }
 

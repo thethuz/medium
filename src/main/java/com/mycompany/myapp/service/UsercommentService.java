@@ -20,7 +20,8 @@ import java.util.List;
 public class UsercommentService {
 
     private final Logger log = LoggerFactory.getLogger(UsercommentService.class);
-    
+
+    //Ghi de len interface
     @Inject
     private UsercommentRepository usercommentRepository;
 
@@ -38,24 +39,32 @@ public class UsercommentService {
 
     /**
      *  Get all the usercomments.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Page<Usercomment> findAll(Pageable pageable) {
         log.debug("Request to get all Usercomments");
         Page<Usercomment> result = usercommentRepository.findAll(pageable);
+        System.out.println("\nUsercommentService");
+        System.out.println(result);
+
         return result;
     }
 
+    @Transactional(readOnly = true)
+    public List<Usercomment> findAllByStoryID(int storyid){
+      List<Usercomment>result= usercommentRepository.findAllByStoryID(1);
+      return result;
+    }
     /**
      *  Get one usercomment by id.
      *
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public Usercomment findOne(Long id) {
         log.debug("Request to get Usercomment : {}", id);
         Usercomment usercomment = usercommentRepository.findOne(id);

@@ -11,5 +11,6 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface UsercommentRepository extends JpaRepository<Usercomment,Long> {
+  List<Usercomment> findAllByStoryID(int storyid);
 
 }

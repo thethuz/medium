@@ -11,5 +11,7 @@ import java.util.List;
  */
 @SuppressWarnings("unused")
 public interface StoryRepository extends JpaRepository<Story,Long> {
-
+  List<Story> findAllByAuthor(String author);
+  List<Story> findAllByCategory(String category);
+  //List<Story> findAllByDate(String date);
 }
