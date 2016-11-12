@@ -109,8 +109,12 @@ public class StoryResource {
     public ResponseEntity<List<Story>> getAllStoriesByAuthor(String author) throws URISyntaxException{
       System.out.println("\nRequest to get AllStories with author");
       List<Story> list = storyService.findAllByAuthor(author);
-      HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(list, "api/stories");
-      return new ResponseEntity<>(list.getContent(), headers, HttpStatus.OK);
+      //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(list, "api/stories/author");
+      HttpHeaders headers = new HttpHeaders();
+      URI location=new URI("api/story/author/");
+      headers.setLocation(location);
+      headers.set("MyResponseHeader", "MyValue");
+      return new ResponseEntity<List<Story>>(list, headers, HttpStatus.OK);
     }
 
     /**
