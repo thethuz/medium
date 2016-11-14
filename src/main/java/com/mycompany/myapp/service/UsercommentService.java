@@ -55,7 +55,7 @@ public class UsercommentService {
 
     @Transactional(readOnly = true)
     public List<Usercomment> findAllByStoryID(int storyid){
-      List<Usercomment>result= usercommentRepository.findAllByStoryID(1);
+      List<Usercomment>result= usercommentRepository.findAllByStoryID(storyid);
       return result;
     }
     /**

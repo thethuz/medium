@@ -15,7 +15,7 @@
                 method: 'GET',
                 transformResponse: function (data) {
                     if (data) {
-                      console.log(data);
+                      //console.log(data);
                         data = angular.fromJson(data);
                         data.timeCreated = DateUtils.convertDateTimeFromServer(data.timeCreated);
                     }
@@ -25,6 +25,5 @@
             'update': { method:'PUT' }
         });
     }
-    
-})();
 
+})();

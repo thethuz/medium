@@ -2,7 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Usercomment;
-
+import com.mycompany.myapp.service.UsercommentService;
 import com.mycompany.myapp.repository.UsercommentRepository;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -30,7 +30,8 @@ public class UsercommentResource {
 
     @Inject
     private UsercommentRepository usercommentRepository;
-
+	@Inject 
+	private UsercommentService usercommentService;
     /**
      * POST  /usercomments : Create a new usercomment.
      *
@@ -95,6 +96,23 @@ public class UsercommentResource {
         return usercomments;
     }
 
+	/**
+	* GET * UserComment by Story
+	*/
+	@RequestMapping(value = "/usercomments/story/{storyid}",
+        method= RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Usercomment>> getAllStoriesByStoryID(@PathVariable int storyid) throws URISyntaxException{
+      System.out.println("\nRequest to get AllComment with storyid");
+      List<Usercomment> list = usercommentService.findAllByStoryID(storyid);
+      //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(list, "api/stories/storyid");
+      HttpHeaders headers = new HttpHeaders();
+      URI location=new URI("api/story/comment/storyid/");
+      headers.setLocation(location);
+      headers.set("MyResponseHeader", "MyValue");
+      return new ResponseEntity<>(list, headers, HttpStatus.OK);
+    }
     /**
      * GET  /usercomments/:id : get the "id" usercomment.
      *

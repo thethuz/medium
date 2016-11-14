@@ -100,13 +100,13 @@ public class StoryResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     /**
-    *get All storywith author
+    *get All story with author
     */
     @RequestMapping(value = "/stories/author/{author}",
         method= RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<List<Story>> getAllStoriesByAuthor(String author) throws URISyntaxException{
+    public ResponseEntity<List<Story>> getAllStoriesByAuthor(@PathVariable String author) throws URISyntaxException{
       System.out.println("\nRequest to get AllStories with author");
       List<Story> list = storyService.findAllByAuthor(author);
       //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(list, "api/stories/author");
@@ -114,9 +114,25 @@ public class StoryResource {
       URI location=new URI("api/story/author/");
       headers.setLocation(location);
       headers.set("MyResponseHeader", "MyValue");
-      return new ResponseEntity<List<Story>>(list, headers, HttpStatus.OK);
+      return new ResponseEntity<>(list, headers, HttpStatus.OK);
     }
-
+	/**
+    *get All story with category
+    */
+	@RequestMapping(value = "/stories/category/{category}",
+        method= RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Story>> getAllStoriesByCategory(@PathVariable String category) throws URISyntaxException{
+      System.out.println("\nRequest to get AllStories with category");
+      List<Story> list = storyService.findAllByCategory(category);
+      //HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(list, "api/stories/category");
+      HttpHeaders headers = new HttpHeaders();
+      URI location=new URI("api/story/category/");
+      headers.setLocation(location);
+      headers.set("MyResponseHeader", "MyValue");
+      return new ResponseEntity<>(list, headers, HttpStatus.OK);
+    }
     /**
      * GET  /stories/:id : get the "id" story.
      *

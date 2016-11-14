@@ -41,8 +41,18 @@
                 }
             },
             resolve: {
-                entity: ['$stateParams', 'Story', function($stateParams, Story) {
-                    return Story.get({id : $stateParams.id}).$promise;
+              entity: ['$stateParams', 'Story','$resource','DataUtils', function($stateParams,        Story, $resource, DataUtils) {
+                  console.log("_");
+					//loadComment();
+					//var usercomAPI='api/usercomments/story/'+$stateParams.id;
+					//console.log(usercomAPI);
+					     var comment= $resource('api/usercomments/story/1',{});
+					     console.log('xxx');
+					     //comment.query({activated:true}).$promise.then(function(data){
+						      //for(var i=0;i<data.length;i++)
+								//  console.log(data[i]);
+					           //});
+					                return Story.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
@@ -50,9 +60,10 @@
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
+					//console.log(currentStateData);
                     return currentStateData;
                 }]
-            }
+            }/**/
         })
         .state('story-detail.edit', {
             parent: 'story-detail',
@@ -73,7 +84,7 @@
                         }]
                     }
                 }).result.then(function() {
-					
+
                     $state.go('^', {}, { reload: false });
                 }, function() {
 					console.log("$state.go^");

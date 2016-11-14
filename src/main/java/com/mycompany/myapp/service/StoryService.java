@@ -56,6 +56,7 @@ public class StoryService {
     @Transactional(readOnly = true)
     public List<Story> findAllByAuthor(String author){
       List<Story> result = storyRepository.findAllByAuthor("admin");
+      System.out.println("\n\n StoryService find All By Author"+result+"\n");
       return result;
     }
     /**
