@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "dateOfBirth",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "imgLink",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "0"
+        }
+    ],
+    "changelogDate": "20161121153114",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "user_info",
+    "pagination": "no"
+}
