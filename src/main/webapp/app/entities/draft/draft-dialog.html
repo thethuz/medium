@@ -1,0 +1,55 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDraftLabel">Create or edit a Draft</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        
+        <div class="form-group">
+            <label class="control-label" for="field_authorID">Author ID</label>
+            <input type="number" class="form-control" name="authorID" id="field_authorID"
+                    ng-model="vm.draft.authorID"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_timeCreate">Time Create</label>
+                <div class="input-group">
+                    <input id="field_timeCreate" type="text" class="form-control" name="timeCreate" datetime-picker="{{dateformat}}" ng-model="vm.draft.timeCreate" is-open="vm.datePickerOpenStatus.timeCreate"
+                      />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('timeCreate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_title">Title</label>
+            <input type="text" class="form-control" name="title" id="field_title"
+                    ng-model="vm.draft.title"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_content">Content</label>
+                <textarea class="form-control" name="content" id="field_content"
+                    ng-model="vm.draft.content"  ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_category">Category</label>
+            <input type="text" class="form-control" name="category" id="field_category"
+                    ng-model="vm.draft.category"
+                     />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,54 @@
+Dữ liệu "data" được story.service.js lấy từ database (thông qua API với web/rest/StoryResources.java)
+/**Bắt đầu từ đây
+function Story ($resource, DateUtils) {
+    var resourceUrl =  'api/stories/:id';
+
+    return $resource(resourceUrl, {}, {
+        'query': { method: 'GET', isArray: true},
+        'get': {
+            method: 'GET',
+            transformResponse: function (data) {
+                if (data) {
+                    data = angular.fromJson(data);
+                    data.timeCreated = DateUtils.convertDateTimeFromServer(data.timeCreated);
+                }
+                return data;//"data" đc trả về
+            }
+        },
+        'update': { method:'PUT' }
+    });
+}
+cho tới đây**/
+Trong file story.controller.js, hàm onSuccess được sử dụng để nạp dữ liệu từ "data" vào mảng vm.stories qua phương thức push(data[i])
+/*
+Story.query({
+    page: vm.page,
+    size: 20,
+    sort: sort()
+}, onSuccess, onError);//Câu lệnh này gọi đến 2 phương thức là onSuccess và onError
+function sort() {
+    var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+    if (vm.predicate !== 'id') {
+        result.push('id');
+    }
+    console.log("VM predicate"+vm.predicate);
+    return result;
+}
+//Function này lấy dữ liệu từ data và nạp vào vm.stories
+function onSuccess(data, headers) {
+    vm.links = ParseLinks.parse(headers('link'));
+    vm.totalItems = headers('X-Total-Count');
+    for (var i = 0; i < data.length; i++) {
+        vm.stories.push(data[i]);
+    }
+    
+}
+
+function onError(error) {
+    AlertService.error(error.data.message);
+}
+
+*/
+
+Đồng thời trả kết quả về cho Story
+Tại stories.html, thẻ {{}} yêu cầu dữ liệu từ Story và in ra trình duyệt.

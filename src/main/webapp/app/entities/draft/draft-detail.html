@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span>Draft</span> {{vm.draft.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Author ID</span></dt>
+        <dd>
+            <span>{{vm.draft.authorID}}</span>
+        </dd>
+        <dt><span>Time Create</span></dt>
+        <dd>
+            <span>{{vm.draft.timeCreate | date:'medium'}}</span>
+        </dd>
+        <dt><span>Title</span></dt>
+        <dd>
+            <span>{{vm.draft.title}}</span>
+        </dd>
+        <dt><span>Content</span></dt>
+        <dd>
+            <span>{{vm.draft.content}}</span>
+        </dd>
+        <dt><span>Category</span></dt>
+        <dd>
+            <span>{{vm.draft.category}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="draft-detail.edit({id:vm.draft.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm"> Edit</span>
+    </button>
+</div>
